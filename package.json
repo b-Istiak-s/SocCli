@@ -1,0 +1,31 @@
+{
+  "name": "soccli",
+  "version": "0.1.0",
+  "description": "Terminal-first real-time protocol CLI for WebSocket, Pusher/Reverb, Socket.IO, and GraphQL subscriptions",
+  "type": "module",
+  "bin": {
+    "soccli": "./bin/soccli.js"
+  },
+  "scripts": {
+    "start": "node ./bin/soccli.js",
+    "lint": "node --check ./bin/soccli.js && node --check ./src/cli/program.js",
+    "test": "node --test"
+  },
+  "keywords": [
+    "cli",
+    "websocket",
+    "pusher",
+    "reverb",
+    "socket.io",
+    "graphql",
+    "subscriptions"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "commander": "^13.1.0",
+    "ws": "^8.18.3"
+  }
+}
