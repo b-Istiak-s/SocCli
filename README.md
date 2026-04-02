@@ -39,6 +39,33 @@ Then run:
 soccli --help
 ```
 
+## Docker
+
+Build the image:
+
+```bash
+docker build -t soccli .
+```
+
+Run help or any one-shot command exactly like the local CLI:
+
+```bash
+docker run --rm soccli --help
+docker run --rm soccli raw connect --help
+docker run --rm soccli pusher connect "wss://example.com/app/APP_KEY?protocol=7&client=soccli&version=0.1.0"
+docker run --rm soccli socketio emit "wss://example.com/socket.io/?EIO=4&transport=websocket" --event message --data '{"text":"hello"}'
+docker run --rm soccli graphql subscribe wss://example.com/graphql --query 'subscription { ping }'
+```
+
+For interactive sessions, allocate a TTY and keep stdin open:
+
+```bash
+docker run --rm -it soccli raw connect wss://example.com/websocket
+docker run --rm -it soccli graphql connect wss://example.com/graphql
+```
+
+If the target service runs on your host machine, you may need Docker networking options or `host.docker.internal`, depending on your platform.
+
 ## Architecture
 
 Layered, modular structure:
