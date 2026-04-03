@@ -87,3 +87,157 @@ All follow existing architecture:
 
 1. Add protocol conformance fixtures for new frame parsers/builders.
 2. Add protocol capability matrix docs and examples per protocol.
+
+## 6) How to handle each protocol in `soccli`
+
+Below are practical command patterns for each currently supported protocol.
+
+### Raw WebSocket
+
+```bash
+soccli raw connect wss://example.com/ws
+```
+
+```bash
+soccli raw connect \
+  --host example.com \
+  --port 443 \
+  --secure \
+  --path /ws \
+  --query token=abc \
+  -H "Authorization: Bearer TOKEN"
+```
+
+### Pusher / Laravel Reverb
+
+```bash
+soccli pusher subscribe \
+  --host example.com \
+  --port 443 \
+  --secure \
+  --path /app/APP_KEY \
+  --channel private-users.1 \
+  --auth-endpoint https://example.com/api/broadcasting/auth \
+  --auth-header "Authorization: Bearer TOKEN"
+```
+
+### Socket.IO
+
+```bash
+soccli socketio emit \
+  --host example.com \
+  --port 443 \
+  --secure \
+  --path /socket.io/ \
+  --namespace /chat \
+  --event message \
+  --data '{"text":"hello"}'
+```
+
+### GraphQL subscriptions (`graphql-transport-ws`)
+
+```bash
+soccli graphql subscribe \
+  --host example.com \
+  --port 443 \
+  --secure \
+  --path /graphql \
+  --init-payload '{"Authorization":"Bearer TOKEN"}' \
+  --query 'subscription { messageAdded { id text } }'
+```
+
+### JSON-RPC over WebSocket
+
+```bash
+soccli jsonrpc call \
+  --host example.com \
+  --port 443 \
+  --secure \
+  --path /rpc \
+  --method user.get \
+  --params '{"id": 42}'
+```
+
+Interactive `jsonrpc connect` accepts either:
+- full JSON-RPC request object (`{"method":"x","params":{},"id":1}`)
+- notification object (`{"method":"x","params":{}}`)
+
+### STOMP over WebSocket
+
+```bash
+soccli stomp subscribe \
+  --host example.com \
+  --port 443 \
+  --secure \
+  --path /ws \
+  --vhost / \
+  --login app \
+  --passcode secret \
+  --destination /topic/updates
+```
+
+Interactive `stomp` mode:
+- JSON with `{ "id": "..." }` sends ACK
+- plain text sends `SEND` to the selected destination
+
+### SignalR over WebSocket
+
+```bash
+soccli signalr invoke \
+  --host example.com \
+  --port 443 \
+  --secure \
+  --path /hub/chat \
+  --target SendMessage \
+  --args '["hello", "world"]' \
+  -H "Authorization: Bearer TOKEN"
+```
+
+`signalr connect` sends handshake automatically, then interactive mode can send raw SignalR payloads or JSON with `target`.
+
+### MQTT over WebSocket
+
+```bash
+soccli mqtt subscribe \
+  --host example.com \
+  --port 443 \
+  --secure \
+  --path /mqtt \
+  --client-id soccli-client \
+  --username app \
+  --password secret \
+  --topic sensors/temperature
+```
+
+Interactive `mqtt connect` supports JSON actions:
+- `{"action":"subscribe","topic":"a/b"}`
+- `{"action":"publish","topic":"a/b","payload":"hello"}`
+- `{"action":"ping"}`
+
+### WAMP over WebSocket
+
+```bash
+soccli wamp call \
+  --host example.com \
+  --port 443 \
+  --secure \
+  --path /ws \
+  --realm realm1 \
+  --procedure com.example.sum \
+  --args '[1,2,3]'
+```
+
+```bash
+soccli wamp subscribe \
+  --host example.com \
+  --port 443 \
+  --secure \
+  --path /ws \
+  --realm realm1 \
+  --topic com.example.topic
+```
+
+Interactive `wamp connect` supports JSON actions:
+- `{"action":"subscribe","topic":"com.example.topic"}`
+- `{"action":"publish","topic":"com.example.topic","args":["hi"]}`
+- `{"action":"call","procedure":"com.example.echo","args":["hello"]}`
