@@ -26,7 +26,6 @@ Requested list from product discussion:
 - Server-Sent Events (SSE)
 - gRPC (HTTP/2 + Protobuf)
 - MQTT
-- AMQP (via brokers like RabbitMQ)
 - Kafka Protocol (via Apache Kafka)
 - Socket.IO protocol
 - SignalR
@@ -54,7 +53,6 @@ These are not WebSocket-native protocol targets for this CLI scope:
 6. **SignalR over WS** ✅ (added)
 7. **WAMP over WS** ✅ (added)
 8. **MQTT over WS** ✅ (added)
-9. **AMQP over WS** ⚠️ (possible via broker bridges/plugins, lower portability)
 
 ## 3) Popularity-ordered WebSocket protocol priorities
 
@@ -67,7 +65,6 @@ Ordered by broad ecosystem adoption / production usage patterns (general industr
 5. **MQTT over WebSocket** (implemented in this phase)
 6. **JSON-RPC over WebSocket** (implemented in this phase)
 7. **WAMP** (implemented in this phase)
-8. **AMQP over WebSocket bridges** (deferred)
 
 ## 4) What was built in this phase
 
@@ -90,4 +87,3 @@ All follow existing architecture:
 
 1. Add protocol conformance fixtures for new frame parsers/builders.
 2. Add protocol capability matrix docs and examples per protocol.
-3. Evaluate AMQP-over-WS plugin compatibility matrix by broker.
