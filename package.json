@@ -1,11 +1,17 @@
 {
   "name": "soccli",
-  "version": "0.1.0",
-  "description": "Terminal-first real-time protocol CLI for WebSocket, Pusher/Reverb, Socket.IO, and GraphQL subscriptions.",
+  "version": "0.0.1",
+  "description": "Terminal-first real-time protocol CLI for WebSocket, Pusher/Reverb, Socket.IO, GraphQL, JSON-RPC, STOMP, SignalR, MQTT, and WAMP.",
   "type": "module",
   "bin": {
     "soccli": "./bin/soccli.js"
   },
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "start": "node ./bin/soccli.js",
     "check": "node --check ./bin/soccli.js",
@@ -14,12 +20,28 @@
   "engines": {
     "node": ">=18.17"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/b-Istiak-s/SocCli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/b-Istiak-s/SocCli/issues"
+  },
+  "homepage": "https://github.com/b-Istiak-s/SocCli#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "cli",
     "websocket",
     "pusher",
     "socket.io",
     "graphql",
+    "json-rpc",
+    "stomp",
+    "signalr",
+    "mqtt",
+    "wamp",
     "subscriptions",
     "reverb"
   ],
