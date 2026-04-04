@@ -1,0 +1,10 @@
+node_modules
+.codex
+.gitignore
+.gitkeep
+.vscode
+.DS_Store
+*.log
+*.tsbuildinfo
+dist
+coverage
