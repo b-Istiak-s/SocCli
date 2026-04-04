@@ -8,8 +8,17 @@ It supports:
 - Pusher / Laravel Reverb (Pusher protocol)
 - Socket.IO (Engine.IO v4 websocket transport)
 - GraphQL subscriptions (`graphql-transport-ws`)
+- JSON-RPC 2.0 over WebSocket
+- STOMP over WebSocket
+- SignalR over WebSocket
+- MQTT over WebSocket
+- WAMP over WebSocket
 
 The project is ESM-only, CLI-only, and designed for real-world deployments behind reverse proxies.
+
+## Protocol expansion notes
+
+To keep this README concise, WebSocket protocol filtering/planning and rollout notes are documented in `docs/websocket-protocol-plan.md`.
 
 ## Why soccli
 

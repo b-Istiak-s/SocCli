@@ -15,7 +15,10 @@ export class WebSocketTransport {
       this.socket = new WebSocket(url, protocols, { headers });
 
       this.socket.once('open', () => resolve(this.socket));
-      this.socket.once('error', (err) => reject(new SoccliError(`Failed to connect to ${url}`, { cause: err })));
+      this.socket.once('error', (err) => {
+        const detail = err?.message ? `: ${err.message}` : '';
+        reject(new SoccliError(`Failed to connect to ${url}${detail}`, { cause: err }));
+      });
       this.socket.on('close', (code, reasonBuffer) => {
         const reason = reasonBuffer?.toString() ?? '';
         this.logger?.debug?.('socket close', { code, reason });
